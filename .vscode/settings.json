@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "\"*.extension\"": "\"css\"",
+        "iostream": "cpp"
+    }
+}
