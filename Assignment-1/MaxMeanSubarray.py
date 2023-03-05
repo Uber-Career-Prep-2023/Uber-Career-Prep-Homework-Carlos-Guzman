@@ -34,20 +34,18 @@ output: 1.5
 # 
 
 
-# solution using Sliding Windows O(n)
-
+# solution using Sliding Windows, time complexity  O(n), space complexity of the algorithm is O(1), time 37 min
 array = [1, 1, 1, 1, -1, -1, 2, -1, -1, 6] 
 k = 5
-suma = 0
-maxsum = 0
-suma = sum(array[:k])
-maxsum = suma
-for i in range(len(array)-k):
-    suma = suma - array[i] + array[i+k]
-    if suma > maxsum:
-        maxsum = suma
-print (maxsum/k)
 
-
-
-# time 37 min 
+def MaxMeanSubarray(array,k):
+    suma = 0
+    maxsum = 0
+    suma = sum(array[:k])
+    maxsum = suma
+    for i in range(len(array)-k):
+        suma = suma - array[i] + array[i+k]
+        if suma > maxsum:
+            maxsum = suma
+    return(maxsum/k)
+print(MaxMeanSubarray(array,k))

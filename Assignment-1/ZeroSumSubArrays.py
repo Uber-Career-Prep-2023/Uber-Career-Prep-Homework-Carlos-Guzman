@@ -66,7 +66,7 @@ Output: 2
 #             contador += 1
 # print(contador)
 
-#solution O(n) hashtable technique time 48 min sorry for the time 
+#solution use hashtable technique, time complexity is O(n) and space complexity is O(n) time 48 min sorry for the time 
 
 arr = [4,5,2,-2]
 

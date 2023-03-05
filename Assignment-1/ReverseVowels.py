@@ -88,7 +88,7 @@ while left_pointer < rigth_pointer:
 '''
 
 
-# solution O(n) time 38 min
+# solution uses the two-pointer technique, The time complexity of the algorithm is O(n), The space complexity is O(n), time 38 min
 
 string = "Uber Career Prep"
 vowels = set('aeiouAEIOU')
@@ -96,26 +96,27 @@ string_list = list(string)
 
 #print(string_list)
 
+def ReverseVowels(vowels,string_list):
+    left_pointer = 0
+    rigth_pointer = len(string_list) -1
 
-left_pointer = 0
-rigth_pointer = len(string_list) -1
-
-        
-while left_pointer < rigth_pointer:
-    if string_list[left_pointer] in vowels or string_list[rigth_pointer] in vowels:
-        if string_list[left_pointer] in vowels and string_list[rigth_pointer] in vowels:
-            vowel_left = string_list[left_pointer]
-            vowel_rigth = string_list[rigth_pointer]
-            string_list[rigth_pointer] = vowel_left
-            string_list[left_pointer] = vowel_rigth
+            
+    while left_pointer < rigth_pointer:
+        if string_list[left_pointer] in vowels or string_list[rigth_pointer] in vowels:
+            if string_list[left_pointer] in vowels and string_list[rigth_pointer] in vowels:
+                vowel_left = string_list[left_pointer]
+                vowel_rigth = string_list[rigth_pointer]
+                string_list[rigth_pointer] = vowel_left
+                string_list[left_pointer] = vowel_rigth
+                rigth_pointer -= 1
+                left_pointer += 1
+            elif string_list[left_pointer] in vowels:
+                rigth_pointer -= 1
+            elif string_list[rigth_pointer] in vowels:
+                left_pointer += 1
+        else: 
             rigth_pointer -= 1
             left_pointer += 1
-        elif string_list[left_pointer] in vowels:
-            rigth_pointer -= 1
-        elif string_list[rigth_pointer] in vowels:
-            left_pointer += 1
-    else: 
-        rigth_pointer -= 1
-        left_pointer += 1
-result = "".join(string_list)
-print(result)
+    result = "".join(string_list)
+    return(result)
+print(ReverseVowels(vowels,string_list))

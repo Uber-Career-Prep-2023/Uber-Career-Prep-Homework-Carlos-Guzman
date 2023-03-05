@@ -20,7 +20,7 @@ n = 13
 """
 
 
-#solution complexity O(n) compelxity  O(1) time 14 min space 
+#solution using Linear Search" o "Sequential Search" complexity O(n) space compelxity  O(1) time 14 min space 
 
 
 array =  [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12]

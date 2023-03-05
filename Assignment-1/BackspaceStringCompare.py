@@ -73,7 +73,7 @@ print(comparar(string1_lst,string2_lst))
 
 
 
-# solution O(n) space complecity O(n) time 28 min 
+# solution complexity O(n), space complexity is O(n), time 28 min, uses a string processing technique
 
 def process_keystrokes(s):
     result = ""
