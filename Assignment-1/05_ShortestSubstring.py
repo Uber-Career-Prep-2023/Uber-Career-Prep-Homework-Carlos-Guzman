@@ -25,7 +25,7 @@ target = "zzyzx"
 
 
 # solution the optimal solution is using the dynamic sliding window
-# time 37 min, time complexity O(n), space complexity is O(k) where k is the number of distinct characters in the target string 
+# time 47 min, time complexity O(n), space complexity is O(k) where k is the number of distinct characters in the target string 
 
 
 def shortest_substring(s: str, target: str) -> int:
