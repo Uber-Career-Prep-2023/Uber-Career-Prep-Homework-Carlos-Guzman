@@ -1,3 +1,15 @@
+""" 
+Node insertAtFront(Node head, int val) // creates new Node with data val at front; returns new head
+void insertAtBack(Node head int val) // creates new Node with data val at end
+void insertAfter(Node head, int val, Node loc) // creates new Node with data val after Node loc
+Node deleteFront(Node head) // removes first Node; returns new head
+void deleteBack(Node head) // removes last Node
+Node deleteNode(Node head, Node loc) // deletes Node loc; returns head
+int length(Node head) // returns length of the list
+Node reverseIterative(Node head) // reverses the linked list iteratively
+Node reverseRecursive(Node head) // reverses the linked list recursively (Hint: you will need a helper function)
+"""
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -94,7 +106,7 @@ class SinglyLinkedList:
         del current
         # Return a reference to the previus node
         return aux
-    def length(head): # Function to calculate the length of the linked list
+    def length(self,head): # Function to calculate the length of the linked list
         length = 0  # Initialize a variable to keep track of the length
         current = head  # Set a pointer to the head of the linked list
         while current != None:  # Traverse the linked list until the end
@@ -115,14 +127,25 @@ class SinglyLinkedList:
             
 
 
-    """def reverseRecursive(head):   #reverses the linked list recursively
-        current =  head
-        if current.next == None:
-            return current
-        else:
-            current = head.next 
-            reverseRecursive(current) 
-    """
+    def reverseRecursive(self, current_node, prev_node=None):   # Reverses the linked list recursively
+        if current_node.next is None:  # If current_node is the last node in the original list
+            self.head = current_node  # Update the head of the list to the current_node (last node of the original list)
+            current_node.next = prev_node  # Set the next pointer of the current_node to the prev_node
+            return None  # Return None since the reversal process is complete
+
+        aux = current_node.next  # Store the next node in the original list
+        current_node.next = prev_node  # Set the next pointer of the current_node to the prev_node
+        return self.reverseRecursive(aux, current_node)  # Recursively call the function with the next node and the current node as the new prev_node
+    
+    def print_linked_list(linked_list): #Function to print the list
+        current = linked_list.head
+        while current is not None:
+            print(current.data, end=' -> ')
+            current = current.next
+        print("None")
+
+
+"""From here on, there is a test cases"""
 
 # Create an empty linked list
 my_list = SinglyLinkedList()
@@ -144,9 +167,7 @@ my_list.insertAfter(my_list.head, 4, my_node)
 # Print the list
 my_node = my_list.head
 print('linked list:')
-while my_node != None:
-    print(my_node.data)
-    my_node = my_node.next
+my_list.print_linked_list()
 # Delete the first node of the list
 my_list.deleteFront(my_list.head)
 # Delete the last node of the list
@@ -160,31 +181,32 @@ my_list.deleteNode(my_list.head, my_node)
 
 # Print the list
 print('linked list deleting elements')
-my_node = my_list.head
-while my_node != None:
-    print(my_node.data)
-    my_node = my_node.next
+my_list.print_linked_list()
 print("Length of the linked list:", my_list.length(my_list.head))
 # Reverse the linked list
 reversed_list = my_list.reverseIterative(my_list.head)
 
 # Print the reversed list
-my_node = reversed_list.head
-while my_node != None:
-    print(my_node.data)
-    my_node = my_node.next
+my_list.print_linked_list()
 
 
-""" 
-Node insertAtFront(Node head, int val) // creates new Node with data val at front; returns new head
-void insertAtBack(Node head int val) // creates new Node with data val at end
-void insertAfter(Node head, int val, Node loc) // creates new Node with data val after Node loc
-Node deleteFront(Node head) // removes first Node; returns new head
-void deleteBack(Node head) // removes last Node
-Node deleteNode(Node head, Node loc) // deletes Node loc; returns head
-int length(Node head) // returns length of the list
-Node reverseIterative(Node head) // reverses the linked list iteratively
-Node reverseRecursive(Node head) // reverses the linked list recursively (Hint: you will need a helper function)
-"""
+# Create an empty linked list
+my_list2 = SinglyLinkedList()
+
+# Insert a node with value 1, 2 and 3 at the front of the list
+my_list2.insertAtFront(1)
+my_list2.insertAtFront(2)
+my_list2.insertAtFront(3)
+
+# Print the original list
+print("Original linked list:")
+my_list2.print_linked_list()
+
+# Reverse the linked list recursively
+my_list2.reverseRecursive(my_list2.head)
+
+# Print the reversed list
+print("Reversed linked list:")
+my_list2.print_linked_list()
 
 
