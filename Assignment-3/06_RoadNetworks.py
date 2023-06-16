@@ -1,5 +1,11 @@
 """In some states, it is not possible to drive between any two towns because they are not connected to the same road network. Given a list of towns and a list of pairs representing roads between towns, return the number of road networks. (For example, a state in which all towns are connected by roads has 1 road network, and a state in which none of the towns are connected by roads has 0 road networks.)
 """
+"""
+Time: O(V+E) (DFS traversal on adjacency list)
+Space: O(V) (storing visited nodes and adjacency list)
+Technique: Depth-First Search (DFS) on each non-visited town.
+Time: ~38 minutes.
+"""
 
 def build_adjacency_list(edges):
     # Initialize an empty dictionary to hold the adjacency list

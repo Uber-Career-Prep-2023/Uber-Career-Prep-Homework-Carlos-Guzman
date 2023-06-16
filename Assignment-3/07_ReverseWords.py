@@ -1,7 +1,12 @@
 """
 Given a string, return the string with the order of the space-separated words reversed
 """
-
+"""
+Time: O(N) (Iterating over all characters in the string)
+Space: O(N) (Storing split words and reversed string)
+Technique: String manipulation.
+Time: ~25 minutes.
+"""
 def ReverseWords(string):
     reversed_string = ''  # Variable to store the reversed string
     splitted_string = []  # List to store individual words

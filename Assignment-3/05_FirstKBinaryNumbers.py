@@ -1,6 +1,11 @@
 """Given a number, k, return an array of the first k binary numbers, represented as strings.
 """
-
+"""
+Time: O(N^2) (converting each of first N numbers to binary)
+Space: O(N) (storing N binary strings)
+Technique: Iteration and base conversion
+Time: ~30 minutes.
+"""
 
 # Function to convert decimal number to binary string
 def decimal_to_binary(decimal):

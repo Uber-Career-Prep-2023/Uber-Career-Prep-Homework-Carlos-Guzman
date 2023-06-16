@@ -1,4 +1,11 @@
 """Given an array of k sorted arrays, merge the k arrays into a single sorted array."""
+"""
+Time: O(N log K) (Inserting N elements into a min-heap, where K is the number of sorted arrays)
+Space: O(N + K) (Storing the merged and sorted array and the min-heap)
+Technique: Heap-based Merge
+Time: ~40 minutes.
+"""
+
 import math
 
 class Heap:

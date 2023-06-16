@@ -1,5 +1,11 @@
 """Given a binary matrix in which 1s represent land and 0s represent water. Return the number of islands (contiguous 1s surrounded by 0s or the edge of the matrix).
 """
+"""
+Time: O(M*N) (for DFS on a 2D grid)
+Space: O(M*N) (for DFS recursion)
+Technique: DFS on 2D grid
+Time: ~40 minutes.
+"""
 
 def num_islands(matrix):
     islands = 0  # Initialize the island count to zero

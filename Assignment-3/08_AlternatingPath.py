@@ -3,6 +3,12 @@ Given an origin and a destination in a directed graph in which edges can be blue
 
 this is called a Bipartite graph
 """
+"""
+Time: O(V + E) (Building the adjacency list and performing BFS)
+Space: O(V) (Storing visited nodes and the queue in BFS)
+Technique: Graph Traversal (BFS)
+Time: ~42 minutes.
+"""
 from collections import deque
 
 def build_adjacency_list(edges):
