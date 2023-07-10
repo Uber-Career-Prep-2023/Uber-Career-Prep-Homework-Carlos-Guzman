@@ -19,18 +19,18 @@ class Heap:
 
     def top(self):
         # Returns the highest priority string element
-        return self.max_heap[0][1] if self.max_heap else None
+        return self.max_heap[0][2] if self.max_heap else None
 
     def insert(self, node):
         # Inserts a new node to the heap
         heap = self.max_heap
-        heap.append([node.priority, node.str])
+        heap.append([node.priority, node.order, node.str])
         child_idx = len(heap) - 1
         parent_idx = (child_idx - 1) // 2
 
         # Heapify up: While the child node is greater than the parent node
-        while child_idx > 0 and heap[child_idx][0] > heap[parent_idx][0]:
-            # Swap child and parent
+        while child_idx > 0 and (heap[child_idx][0] > heap[parent_idx][0] or (heap[child_idx][0] == heap[parent_idx][0] and heap[child_idx][1] < heap[parent_idx][1])):
+            # Swap the child node with the parent node
             heap[child_idx], heap[parent_idx] = heap[parent_idx], heap[child_idx]
             # Move up one level
             child_idx = parent_idx
@@ -52,12 +52,12 @@ class Heap:
         left_idx = 2 * idx + 1
         right_idx = 2 * idx + 2
         largest = idx
-
+        
         # If left child is greater than parent
-        if left_idx < len(self.max_heap) and self.max_heap[left_idx][0] > self.max_heap[largest][0]:
+        if left_idx < len(self.max_heap) and (self.max_heap[left_idx][0] > self.max_heap[largest][0] or (self.max_heap[left_idx][0] == self.max_heap[largest][0] and self.max_heap[left_idx][1] < self.max_heap[largest][1])):
             largest = left_idx
         # If right child is greater than parent
-        if right_idx < len(self.max_heap) and self.max_heap[right_idx][0] > self.max_heap[largest][0]:
+        if right_idx < len(self.max_heap) and (self.max_heap[right_idx][0] > self.max_heap[largest][0] or (self.max_heap[right_idx][0] == self.max_heap[largest][0] and self.max_heap[right_idx][1] < self.max_heap[largest][1])):
             largest = right_idx
         # If a larger child is found, swap it with parent and heapify down
         if largest != idx:
@@ -66,21 +66,21 @@ class Heap:
 
 
 class Node:
-    def __init__(self, str, priority) -> None:
+    def __init__(self, str, priority, order) -> None:
         # Initialize a node with string and priority
         self.str = str
         self.priority = priority
-
+        self.order = order
 
 class Priority_Queue:
     def __init__(self) -> None:
         # Initialize a priority queue
         self.queue = Heap([])
-
-    def insert(self, node):
+        self.insertion_order = 0
+    def insert(self, str, priority):
         # Inserts a node into the queue
-        self.queue.insert(node)
-
+        self.insertion_order += 1
+        self.queue.insert(Node(str, priority, self.insertion_order))
     def top(self):
         # Returns the highest priority string element
         return self.queue.top()
@@ -89,17 +89,91 @@ class Priority_Queue:
         # Removes the highest priority string element
         if len(self.queue.max_heap) == 0:
             return None
-        self.queue.remove()
+        return self.queue.remove()
 
+# # Testing
+# pq = Priority_Queue()
 
-# Testing
+# # Inserting elements with different priorities
+# pq.insert("Element 1", 3)
+# pq.insert("Element 2", 1)
+# pq.insert("Element 3", 5)
+# pq.insert("Element 4", 7)
+# pq.insert("Element 5", 6)
+
+# # Expect: Element 4
+# print(pq.top())  
+# pq.remove()
+
+# # Expect: Element 5
+# print(pq.top())
+# pq.remove()
+
+# # Expect: Element 3
+# print(pq.top())
+# pq.remove()
+
+# # Expect: Element 1
+# print(pq.top())
+# pq.remove()
+
+# # Expect: Element 2
+# print(pq.top())
+
+# # Inserting elements with the same priorities
+# pq.insert("Element 6", 4)
+# pq.insert("Element 7", 4)
+# pq.insert("Element 8", 4)
+# pq.insert("Element 9", 4)
+
+# # Removal should respect the insertion order for the elements with equal priorities
+
+# # Expect: Element 6
+# print(pq.top())  
+# pq.remove()
+
+# # Expect: Element 7
+# print(pq.top())
+# pq.remove()
+
+# # Expect: Element 8
+# print(pq.top())
+# pq.remove()
+
+# # Expect: Element 9
+# print(pq.top())
+# pq.remove()
+
+# Test Case
 pq = Priority_Queue()
-pq.insert(Node("test1", 3))
-pq.insert(Node("test2", 1))
-pq.insert(Node("test3", 2))
 
-print(pq.top())  # Should print: test1
+pq.insert("Node A", 3)
+pq.insert("Node B", 2)
+pq.insert("Node C", 2)
+pq.insert("Node D", 1)
+pq.insert("Node E", 2)
+pq.insert("Node F", 2)
+
+# Expect: Node A (highest priority 3)
+print(pq.top())  
 pq.remove()
-print(pq.top())  # Should print: test3
+
+# Expect: Node B (second highest priority 2, first with this priority)
+print(pq.top())  
 pq.remove()
-print(pq.top())  # Should print: test2
+
+# Expect: Node C (second highest priority 2, second with this priority)
+print(pq.top())  
+pq.remove()
+
+# Expect: Node E (second highest priority 2, third with this priority, inserted before Node F)
+print(pq.top())
+pq.remove()
+
+# Expect: Node F (second highest priority 2, fourth with this priority)
+print(pq.top())
+pq.remove()
+
+# Expect: Node D (lowest priority 1)
+print(pq.top())
+pq.remove()

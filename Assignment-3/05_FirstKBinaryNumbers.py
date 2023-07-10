@@ -6,6 +6,7 @@ Space: O(N) (storing N binary strings)
 Technique: Iteration and base conversion
 Time: ~30 minutes.
 """
+"""
 
 # Function to convert decimal number to binary string
 def decimal_to_binary(decimal):
@@ -47,5 +48,31 @@ def FirstKBinaryNumbers(number):
     return binary_numbers
 
 # Test cases
+print(FirstKBinaryNumbers(5))  # Should print ['0', '1', '10', '11', '100']
+print(FirstKBinaryNumbers(10))  # Should print ['0', '1', '10', '11', '100', '101', '110', '111', '1000', '1001']
+"""
+#solution with a queue
+
+from queue import Queue
+
+def FirstKBinaryNumbers(k):
+    q = Queue()
+    # Start with the binary representation of 1
+    q.put("1")
+
+    result = ["0"] # Start with the binary representation of 0
+    while k > 1:
+        # Remove the next binary number from the queue and add it to the result
+        bin_num = q.get()
+        result.append(bin_num)
+
+        # Add '0' and '1' to the end of the binary number and put it back in the queue
+        q.put(bin_num + "0")
+        q.put(bin_num + "1")
+
+        k -= 1
+
+    return result
+
 print(FirstKBinaryNumbers(5))  # Should print ['0', '1', '10', '11', '100']
 print(FirstKBinaryNumbers(10))  # Should print ['0', '1', '10', '11', '100', '101', '110', '111', '1000', '1001']
